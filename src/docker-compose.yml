@@ -9,8 +9,11 @@ services:
     - ./database/.env
    environment:
     MYSQL_DATABASE: 'habitTrackerDB'
-#   volumes:
-#     - ./mysql_data:/var/lib/mysql
+   healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
  backend:
   image: habit-tracker-backend:latest
   container_name: habitTrackerBackend
@@ -19,3 +22,6 @@ services:
   build: ./backend/.
   env_file: 
     - ./backend/.env
+  depends_on: 
+    db: 
+      condition: service_healthy
