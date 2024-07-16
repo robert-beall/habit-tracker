@@ -1,3 +1,4 @@
+name: habit-tracker
 services:
  db:
    image: mysql:8.0.38
@@ -10,3 +11,11 @@ services:
     MYSQL_DATABASE: 'habitTrackerDB'
 #   volumes:
 #     - ./mysql_data:/var/lib/mysql
+ backend:
+  image: habit-tracker-backend:latest
+  container_name: habitTrackerBackend
+  ports:
+    - "8080:8080"
+  build: ./backend/.
+  env_file: 
+    - ./backend/.env
