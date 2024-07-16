@@ -1,0 +1,12 @@
+services:
+ db:
+   image: mysql:8.0.38
+   container_name: habitTrackerDB
+   ports:
+     - "3306:3306"
+   env_file:
+    - ./database/.env
+   environment:
+    MYSQL_DATABASE: 'habitTrackerDB'
+#   volumes:
+#     - ./mysql_data:/var/lib/mysql
