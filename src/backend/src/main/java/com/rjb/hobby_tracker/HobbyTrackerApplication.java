@@ -1,4 +1,4 @@
-package com.rjb.habit_tracker;
+package com.rjb.hobby_tracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class HabitTrackerApplication {
+public class HobbyTrackerApplication {
 
 	@RequestMapping("/")
 	public String home() {
@@ -15,7 +15,7 @@ public class HabitTrackerApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(HabitTrackerApplication.class, args);
+		SpringApplication.run(HobbyTrackerApplication.class, args);
 	}
 
 }

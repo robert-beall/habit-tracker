@@ -1,22 +1,22 @@
-name: habit-tracker
+name: hobby-tracker
 services:
  db:
    image: mysql:8.0.38
-   container_name: habitTrackerDB
+   container_name: hobbyTrackerDB
    ports:
      - "3306:3306"
    env_file:
     - ./database/.env
    environment:
-    MYSQL_DATABASE: 'habitTrackerDB'
+    MYSQL_DATABASE: 'hobbyTrackerDB'
    healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
  backend:
-  image: habit-tracker-backend:latest
-  container_name: habitTrackerBackend
+  image: hobby-tracker-backend:latest
+  container_name: hobbyTrackerBackend
   ports:
     - "8080:8080"
   build: ./backend/.
