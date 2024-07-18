@@ -6,3 +6,6 @@
 - [Spring Boot Basic Setup](https://spring.io/guides/gs/spring-boot)
 - [Spring Boot Docker](https://spring.io/guides/gs/spring-boot-docker)
 - [Spring Boot Mysql](https://spring.io/guides/gs/accessing-data-mysql)
+
+## Changelog
+- [Changelog guide](https://keepachangelog.com/en/1.1.0/)
