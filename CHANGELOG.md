@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- docs folder
+
 ### Changed
-- 
+- work-cited.md moved to docs
+
+### Removed
+- Unused src/database/docker-compose.yml
 
 ## [0.0.0] - 2024-07-16
 
