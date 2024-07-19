@@ -2,7 +2,7 @@ name: hobby-tracker
 services:
  db:
    image: mysql:8.0.38
-   container_name: hobbyTrackerDB
+   container_name: hobbyTrackerMySQL
    ports:
      - "3306:3306"
    env_file:

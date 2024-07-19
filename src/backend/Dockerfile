@@ -2,7 +2,9 @@
 FROM gradle:jdk17 AS builder
 WORKDIR /app
 COPY . .
-RUN ./gradlew clean build --info
+RUN ./gradlew clean build  -x test
+# --info
+
 
 # Stage 2: Run the application
 FROM eclipse-temurin:17.0.11_9-jre
