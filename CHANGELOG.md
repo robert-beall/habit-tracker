@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- UserEntity.java
+- UserDTO.java
+- UserRepository.java
+- UserService.java
+- UserController.java
+- ModelMapperConfig.java
+- ModelMapper.md documentation
+
+### Changed
+- backend env variables
+- parameterized application.properties
+- Basic spring application test assertion
+
+### Fixed
+- Skip tests on backend build
+
 ## [0.0.1] - 2024-07-18
 
 ### Added
