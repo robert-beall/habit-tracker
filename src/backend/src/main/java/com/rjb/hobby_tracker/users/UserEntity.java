@@ -1,9 +1,9 @@
 package com.rjb.hobby_tracker.users;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,11 +18,13 @@ import lombok.Setter;
 @Setter
 @Table(name = "USER")
 public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    // Preserved so I can use later: 
+    // @Id 
+    // @GeneratedValue(strategy = GenerationType.AUTO)
+    // private Integer id;
 
-    @Column(unique = true, nullable = false)
+    @Id
+    @Column(unique = true, nullable = false, updatable = false)
     private String username;
 
     @Column(nullable = false)

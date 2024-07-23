@@ -5,7 +5,10 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DataRetrievalFailureException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.transaction.Transactional;
 
@@ -37,7 +40,7 @@ public class UserService {
      * @return UserDTO or empty optional
      */
     public Optional<UserDTO> findByUsername(String username) {
-        return userRepository.findByUsername(username).map(e -> modelMapper.map(e, UserDTO.class));
+        return userRepository.findById(username).map(e -> modelMapper.map(e, UserDTO.class));
     }
 
     /**
@@ -59,9 +62,35 @@ public class UserService {
      */
     public void createUser(UserDTO newUser) {
         if (findByUsername(newUser.getUsername()).isPresent()) {
-            throw new DataIntegrityViolationException("User " + newUser.getUsername() + " already exists.");
+            throw new DataIntegrityViolationException(String.format("User %s already exists.", newUser.getUsername()));
         }
 
         userRepository.save(modelMapper.map(newUser, UserEntity.class));
+    }
+
+    /**
+     * Update an existing user. 
+     * 
+     * @param updatedUser submitted user data.
+     */
+    public void updateUser(UserDTO updatedUser) {
+        if (findByUsername(updatedUser.getUsername()).isEmpty()) {
+            throw new DataRetrievalFailureException(String.format("User %s not found.", updatedUser.getUsername()));
+        }
+
+        userRepository.save(modelMapper.map(updatedUser, UserEntity.class));
+    }
+
+    /**
+     * Delete a user by username.
+     * 
+     * @param username
+     */
+    public void deleteUser(String username) {
+        if (userRepository.existsById(username)) {
+            userRepository.deleteById(username);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s does not exist and cannot be deleted.", username));
+        }
     }
 }
