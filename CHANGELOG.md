@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - UserController.java
 - ModelMapperConfig.java
 - ModelMapper.md documentation
+- WebSecurityConfig.java
+- Makefile with startup and teardown commands
 
 ### Changed
 - backend env variables
