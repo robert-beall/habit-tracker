@@ -15,3 +15,6 @@ app-stop:
 
 app-down: 
 	@cd src; docker compose down
+
+free: 
+	@docker system prune -fa --volumes

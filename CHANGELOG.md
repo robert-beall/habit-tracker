@@ -8,20 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- UserEntity.java
-- UserDTO.java
-- UserRepository.java
-- UserService.java
-- UserController.java
+- User Entity, DTO, Repository, Service, and Controller
+- Role Entity, DTO, and repository
+- Privilege Entity, DTO, and repository
 - ModelMapperConfig.java
 - ModelMapper.md documentation
 - WebSecurityConfig.java
 - Makefile with startup and teardown commands
+- AuthController for authentication specific endpoints
+- UserDetailsServiceImpl class
+- UnauthorizedEntrypoint for failed login
 
 ### Changed
-- backend env variables
-- parameterized application.properties
+- Backend env variables
+- Parameterized application.properties
 - Basic spring application test assertion
+- Moved env file to resources folder
+- Added free command to Makefile
 
 ### Fixed
 - Skip tests on backend build

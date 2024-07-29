@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +38,8 @@ public class UserController {
      * 
      * @return List of UserDTOs
      */
-    @GetMapping(path="/list")
+    @GetMapping()
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<UserDTO> listUsers() {
         return userService.findAll();
     }
@@ -47,8 +50,8 @@ public class UserController {
      * @param username
      * @return UserDTO
      */
-    @GetMapping(path="/get")
-    public UserDTO getUser (final String username) {
+    @GetMapping(path="/{username}")
+    public UserDTO getUser (@PathVariable final String username) {
         Optional<UserDTO> res = userService.findByUsername(username);
 
         if (res.isPresent()) {
@@ -77,8 +80,8 @@ public class UserController {
      * @param updatedUser
      * @return ResponseEntity<String>
      */
-    @PutMapping()
-    public ResponseEntity<String> updateUser(@RequestParam("username") String username, @RequestBody UserDTO updatedUser) {
+    @PutMapping("/{username}")
+    public ResponseEntity<String> updateUser(@PathVariable("username") String username, @RequestBody UserDTO updatedUser) {
         
         if (!username.equals(updatedUser.getUsername())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An error occured while updating");
@@ -90,12 +93,12 @@ public class UserController {
     
     /**
      * Delete a user. 
-     * @param username
+     * @param id of user
      * @return ResponseEntity<String>
      */
     @DeleteMapping() 
-    public ResponseEntity<String> deleteUser(@RequestParam("username") String username) {
-        userService.deleteUser(username);
+    public ResponseEntity<String> deleteUser(@RequestParam("id") Integer id) {
+        userService.deleteUser(id);
         return new ResponseEntity<>("User Deleted Successfully", HttpStatus.NO_CONTENT);
     }
 }

@@ -40,7 +40,7 @@ public class UserService {
      * @return UserDTO or empty optional
      */
     public Optional<UserDTO> findByUsername(String username) {
-        return userRepository.findById(username).map(e -> modelMapper.map(e, UserDTO.class));
+        return userRepository.findByUsername(username).map(e -> modelMapper.map(e, UserDTO.class));
     }
 
     /**
@@ -82,15 +82,15 @@ public class UserService {
     }
 
     /**
-     * Delete a user by username.
+     * Delete a user by id.
      * 
-     * @param username
+     * @param id of user entity
      */
-    public void deleteUser(String username) {
-        if (userRepository.existsById(username)) {
-            userRepository.deleteById(username);
+    public void deleteUser(Integer id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s does not exist and cannot be deleted.", username));
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User %s does not exist and cannot be deleted.", id));
         }
     }
 }

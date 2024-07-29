@@ -21,7 +21,7 @@ services:
     - "8080:8080"
   build: ./backend/.
   env_file: 
-    - ./backend/.env
+    - ./backend/src/main/resources/.env
   depends_on: 
     db: 
       condition: service_healthy
