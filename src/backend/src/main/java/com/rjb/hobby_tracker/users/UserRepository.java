@@ -14,10 +14,17 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     public Optional<UserEntity> findByUsername(String username);
 
     /**
-     * Determine if user with username value exists. 
+     * Determine if user with username exists. 
      * 
      * @param username
      * @return <i>true</i> if user exists, <i>false</i> otherwise
      */
     public boolean existsByUsername(String username);
-}
+
+    /**
+     * Determine if user with email already exists
+     * @param email
+     * @return <i>true</i> if user with email exists, <i>false</i> otherwise
+     */
+    public boolean existsByEmail(String email)
+;}

@@ -2,6 +2,7 @@ package com.rjb.hobby_tracker.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -42,10 +43,11 @@ public class WebSecurityConfig {
      * @throws Exception
      */
     @Bean
+    @Order
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                                .requestMatchers(new AntPathRequestMatcher("/users", "POST")).permitAll() // Specify unauthenticated requests
+                                .requestMatchers("/auth/**").permitAll() // Specify unauthenticated requests
                                 .anyRequest().authenticated() // Specify authenticated requests
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll

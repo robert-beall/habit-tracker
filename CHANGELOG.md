@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AuthController for authentication specific endpoints
 - UserDetailsServiceImpl class
 - UnauthorizedEntrypoint for failed login
+- fixes.md document
 
 ### Changed
 - Backend env variables
