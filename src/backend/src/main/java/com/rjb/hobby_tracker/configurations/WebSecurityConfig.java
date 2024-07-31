@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.rjb.hobby_tracker.auth.UnauthorizedEntrypoint;
 import com.rjb.hobby_tracker.auth.UserDetailsServiceImpl;

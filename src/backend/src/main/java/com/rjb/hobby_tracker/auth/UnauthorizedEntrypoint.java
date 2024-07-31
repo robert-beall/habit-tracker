@@ -10,13 +10,25 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * This class defines an endpoint for handling a request made to the application without proper authorization.
+ */
 @Component
 public class UnauthorizedEntrypoint implements AuthenticationEntryPoint {
-
- @Override
- public void commence(HttpServletRequest request, HttpServletResponse response,
+    /**
+     * Endpoint handles unauthorized access to application. 
+     * 
+     * @param request
+     * @param response
+     * @param authException
+     * @throws IOException
+     * @throws ServletException
+     */
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response,
     AuthenticationException authException) throws IOException, ServletException {
+        // Sets unauthorized status code 401
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
- }
+    }
 
 }
