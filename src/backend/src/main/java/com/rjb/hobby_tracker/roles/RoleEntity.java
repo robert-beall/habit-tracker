@@ -2,7 +2,6 @@ package com.rjb.hobby_tracker.roles;
 
 import java.util.Collection;
 
-import com.fasterxml.jackson.annotation.JsonFormat.Feature;
 import com.rjb.hobby_tracker.privileges.PrivilegeEntity;
 import com.rjb.hobby_tracker.users.UserEntity;
 

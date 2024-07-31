@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 
-
+/**
+ * <i>UserController</i> defines endpoints for handling user details from
+ * an admin perspective. Endpoints include user creation, update, listing, and retrieval.
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -51,6 +54,7 @@ public class UserController {
      * @return UserDTO
      */
     @GetMapping(path="/{username}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public UserDTO getUser (@PathVariable final String username) {
         Optional<UserDTO> res = userService.findByUsername(username);
 
@@ -68,6 +72,7 @@ public class UserController {
      * @return status code 201
      */
     @PostMapping()
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> addUser(@RequestBody UserDTO newUser) {
         userService.createUser(newUser);
         return new ResponseEntity<>("User created successfully.", HttpStatus.CREATED);
@@ -81,6 +86,7 @@ public class UserController {
      * @return ResponseEntity<String>
      */
     @PutMapping("/{username}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> updateUser(@PathVariable("username") String username, @RequestBody UserDTO updatedUser) {
         
         if (!username.equals(updatedUser.getUsername())) {
@@ -90,6 +96,36 @@ public class UserController {
         userService.updateUser(updatedUser);
         return new ResponseEntity<>("User Updated Successfully.", HttpStatus.NO_CONTENT);
     }
+
+    /**
+     * Endpoint for assigning a role to a user. 
+     * 
+     * @param username
+     * @param role
+     * @return NO_CONTENT on success
+     */
+    @PutMapping("/role/{username}/{role}") 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<String> assignRole(@PathVariable("username") String username, @PathVariable String role) {
+        userService.assignRoleToUser(username, role);
+
+        return new ResponseEntity<>(String.format("Role %s assigned to user %s", role, username), HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * Endpoint for revoking a role from a user. 
+     * 
+     * @param username
+     * @param role
+     * @return NO_CONTENT on success
+     */
+    @DeleteMapping("/role/{username}/{role}") 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<String> revokeRole(@PathVariable("username") String username, @PathVariable String role) {
+        userService.revokeRoleFromUser(username, role);
+
+        return new ResponseEntity<>(String.format("Role %s revoked from user %s", role, username), HttpStatus.NO_CONTENT);
+    }
     
     /**
      * Delete a user. 
@@ -97,6 +133,7 @@ public class UserController {
      * @return ResponseEntity<String>
      */
     @DeleteMapping() 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> deleteUser(@RequestParam("id") Integer id) {
         userService.deleteUser(id);
         return new ResponseEntity<>("User Deleted Successfully", HttpStatus.NO_CONTENT);

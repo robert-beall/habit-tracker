@@ -1,5 +1,9 @@
 package com.rjb.hobby_tracker.users;
 
+import java.util.Collection;
+
+import com.rjb.hobby_tracker.roles.RoleDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,4 +21,6 @@ public class UserDTO {
     private String email;
 
     private String bio;
+
+    private Collection<RoleDTO> roles;
 }

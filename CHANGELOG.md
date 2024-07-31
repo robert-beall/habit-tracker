@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - User Entity, DTO, Repository, Service, and Controller
-- Role Entity, DTO, and repository
-- Privilege Entity, DTO, and repository
+- Role Entity, DTO, Repository, Service, and Controller
+- Privilege Entity, DTO, and Repository
 - ModelMapperConfig.java
 - ModelMapper.md documentation
 - WebSecurityConfig.java
@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - UserDetailsServiceImpl class
 - UnauthorizedEntrypoint for failed login
 - fixes.md document
+- Scripts directory under database for utility scripts
+- UserRoles.sql for listing user roles
 
 ### Changed
 - Backend env variables

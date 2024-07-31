@@ -67,7 +67,5 @@ public class UserEntity implements UserDetails {
         return privileges;
       }).flatMap(List::stream)
       .collect(Collectors.toList());
-
-      // return getRoles().stream().map(r -> new SimpleGrantedAuthority(r.getName())).toList();
     }
 }

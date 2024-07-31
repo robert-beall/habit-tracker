@@ -134,6 +134,47 @@ public class UserService {
     }
 
     /**
+     * Assign a role to a user. 
+     * 
+     * @param username
+     * @param roleName
+     */
+    public void assignRoleToUser(String username, String roleName) {
+        RoleEntity role = roleRepository.findByName(roleName).orElseThrow(() -> new DataRetrievalFailureException(String.format("Role %s does not exist", roleName)));
+
+        UserEntity user = userRepository.findByUsername(username).orElseThrow(() -> new DataRetrievalFailureException(String.format("User with username %s does not exist", username)));
+
+        if (user.getRoles().stream().anyMatch(r -> r.getName() == roleName)) {
+            throw new DataIntegrityViolationException(String.format("User %s already has role %s assigned", username, roleName));
+        }
+
+        user.getRoles().add(role);
+
+        userRepository.save(user);
+    }
+
+    /**
+     * Revoke a role from a user.
+     * 
+     * @param username
+     * @param roleName
+     */
+    public void revokeRoleFromUser(String username, String roleName) {
+        RoleEntity role = roleRepository.findByName(roleName).orElseThrow(() -> new DataRetrievalFailureException(String.format("Role %s does not exist", roleName)));
+
+        UserEntity user = userRepository.findByUsername(username).orElseThrow(() -> new DataRetrievalFailureException(String.format("User with username %s does not exist", username)));
+
+
+        if (!user.getRoles().stream().anyMatch(r -> r.getName() == role.getName())) {
+            throw new DataIntegrityViolationException(String.format("User %s does not have role %s assigned", user.getUsername(), role.getName()));
+        }
+
+        user.getRoles().removeIf(r -> r.getName().equals(roleName));
+
+        userRepository.save(user);
+    }
+
+    /**
      * Delete a user by id.
      * 
      * @param id of user entity
